@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mvi/starter.svg?style=flat-square)](https://packagist.org/packages/mvi/starter)
 [![Total Downloads](https://img.shields.io/packagist/dt/mvi/starter.svg?style=flat-square)](https://packagist.org/packages/mvi/starter)
-![GitHub Actions](https://github.com/mvi/starter/actions/workflows/main.yml/badge.svg)
+[![PHP Composer](https://github.com/febryars33/mvi-package-starter/actions/workflows/php.yml/badge.svg)](https://github.com/febryars33/mvi-package-starter/actions/workflows/php.yml)
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
