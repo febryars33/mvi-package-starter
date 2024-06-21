@@ -4,6 +4,7 @@ namespace MVI\Starter;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use MVI\Starter\Console\PublishCommand;
 
 class StarterServiceProvider extends ServiceProvider
 {
@@ -21,10 +22,13 @@ class StarterServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerRoutes();
 
+        // Registering package commands.
+        $this->registerCommands();
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('starter.php'),
-            ], 'config');
+                __DIR__ . '/../config/starter.php' => config_path('starter.php'),
+            ], 'starter-config');
 
             // Publishing the views.
             /*$this->publishes([
@@ -40,9 +44,6 @@ class StarterServiceProvider extends ServiceProvider
             /*$this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/starter'),
             ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
         }
     }
 
@@ -52,7 +53,7 @@ class StarterServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'starter');
+        $this->mergeConfigFrom(__DIR__ . '/../config/starter.php', 'starter');
 
         // Register the main class to use with the facade
         $this->app->singleton('starter', function () {
@@ -75,6 +76,15 @@ class StarterServiceProvider extends ServiceProvider
     protected function registerViews()
     {
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'starter');
+    }
+
+    protected function registerCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                PublishCommand::class
+            ]);
+        }
     }
 
     private function routeConfiguration(): array
